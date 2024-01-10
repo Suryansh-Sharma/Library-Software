@@ -1,5 +1,5 @@
 [submodule "Frontend/Frontend-Angular"]
-	path = Frontend/Frontend-Angular
+	path = https://github.com/Suryansh-Sharma/Frontend-Angular
 	url = https://github.com/Suryansh-Sharma/Frontend-Angular
 [submodule "Frontend"]
 	path = Frontend
