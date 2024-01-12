@@ -5,19 +5,25 @@ import com.suryansh.library.entity.UserEntity;
 import com.suryansh.library.exception.SpringLibraryException;
 import com.suryansh.library.model.UserLoginModel;
 import com.suryansh.library.repository.UserEntityRepo;
+import com.suryansh.library.security.JwtService;
 import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 @Service
 public class AuthServiceImpl implements AuthService{
+    private final JwtService jwtService;
     private final UserEntityRepo userEntityRepo;
+    @Value("${jwt-exp-time-min}")
+    private long JWT_EXP_MIN;
     private static final Logger logger = LoggerFactory.getLogger(AuthServiceImpl.class);
 
-    public AuthServiceImpl(UserEntityRepo userEntityRepo) {
+    public AuthServiceImpl(UserEntityRepo userEntityRepo, JwtService jwtService) {
         this.userEntityRepo = userEntityRepo;
+        this.jwtService = jwtService;
     }
 
     @Override
@@ -32,7 +38,8 @@ public class AuthServiceImpl implements AuthService{
         return new LoginResponse(
                 user.getUsername(),
                 user.getRole(),
-                true
+                true,
+                new LoginResponse.JwtResponse(jwtService.GenerateToken(user.getUsername()), JWT_EXP_MIN + " minutes to expire token")
         );
     }
 
@@ -54,7 +61,8 @@ public class AuthServiceImpl implements AuthService{
             return new LoginResponse(
                     user.getUsername(),
                     user.getRole(),
-                    true
+                    true,
+                    new LoginResponse.JwtResponse(jwtService.GenerateToken(user.getUsername()), JWT_EXP_MIN + " minutes to expire token")
             );
         }catch (Exception e){
             logger.error("Unable to create user "+e);

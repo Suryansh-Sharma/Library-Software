@@ -1,10 +1,12 @@
 package com.suryansh.library.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.*;
 
 @Entity
-@Table(name = "user_entity")
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
