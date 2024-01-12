@@ -4,7 +4,9 @@ Welcome to the Library Management System, a comprehensive solution for efficient
 
 ## Technology
 
-- **Spring Boot:** Java Spring Boot is used to manage backend part of project.
+- **Spring Boot:** Java Spring Boot 3 is used to manage backend part of project.
+- **Spring Security:** Spring Security 6 is used to protect endpoint through JWT Token.
+- **Open Api:** Swagger is used for api documentation.
 - **Angular:** Angular handles the frontend part of project.
 - **PostgresQl:** PostgresQl is used for database management.
 - **Apex Chart:** ApexCharts is a free and open-source modern charting library that helps developers to create beautiful and interactive visualizations for web pages.
@@ -26,4 +28,5 @@ Welcome to the Library Management System, a comprehensive solution for efficient
 3. **Spring Rest Api:** Clone backend project and configure fine pdf folder path and database property in [application.yml](/Backend/src/main/resources/application.yml).
 4. **Configuration:** Customize the system according to your library's needs by editing the configuration files.
 5. **Run the Application:** Start the application and navigate to the provided URL to access the Library Management System.
+6. **Api Documentation:** You can also view api documentation at [swagger](http://localhost:8080/swagger-ui/index.html#/).
 
