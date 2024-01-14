@@ -18,7 +18,7 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("/api/v1/library")
-@CrossOrigin("*")
+@CrossOrigin
 public class LibraryController {
     private final LibraryService libraryService;
 

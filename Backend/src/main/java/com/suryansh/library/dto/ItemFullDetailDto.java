@@ -1,5 +1,8 @@
 package com.suryansh.library.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -32,6 +35,8 @@ public class ItemFullDetailDto {
     @Data
     public static class MagazineDto {
         private long id;
+        @JsonDeserialize(using = LocalDateDeserializer.class)
+        @JsonFormat(pattern = "dd/MM/yyyy hh:mm")
         private LocalDate publishedDate;
         private String editor;
     }
@@ -41,8 +46,14 @@ public class ItemFullDetailDto {
         private long id;
         private int quantity;
         private int availableQuantity;
+        @JsonDeserialize(using = LocalDateDeserializer.class)
+        @JsonFormat(pattern = "dd/MM/yyyy hh:mm")
         private LocalDateTime lastStocked;
+        @JsonDeserialize(using = LocalDateDeserializer.class)
+        @JsonFormat(pattern = "dd/MM/yyyy hh:mm")
         private LocalDateTime lastCheckedOut;
+        @JsonDeserialize(using = LocalDateDeserializer.class)
+        @JsonFormat(pattern = "dd/MM/yyyy hh:mm")
         private LocalDateTime lastCheckedIn;
     }
 }
