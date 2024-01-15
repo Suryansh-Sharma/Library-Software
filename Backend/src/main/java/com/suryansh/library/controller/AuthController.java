@@ -25,4 +25,9 @@ public class AuthController {
     public LoginResponse signUp(@Valid @RequestBody UserLoginModel model){
         return authService.createAccount(model);
     }
+    @GetMapping("new-jwt-by-refresh-token")
+    public LoginResponse newJwtByRefreshToken(@RequestParam String refresh_token){
+        return authService.getNewJwtFromRefToken(refresh_token);
+    }
+
 }

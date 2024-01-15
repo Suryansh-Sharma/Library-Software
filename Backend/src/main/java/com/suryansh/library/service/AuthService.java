@@ -7,4 +7,6 @@ public interface AuthService {
     LoginResponse verifyUser(UserLoginModel model);
 
     LoginResponse createAccount(UserLoginModel model);
+
+    LoginResponse getNewJwtFromRefToken(String refreshToken);
 }
