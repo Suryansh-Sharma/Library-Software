@@ -428,6 +428,7 @@ public class LibraryServiceImpl implements LibraryService {
 
     private void updateStockOfItem(LibraryItemModel model, LibraryItemsEntity entity) {
         ItemStockEntity stockEntity = entity.getItemStock();
+        stockEntity.setLastStocked(LocalDateTime.now());
 
         // If Quantity is increased
         if (model.getItemStock().getQuantity() >= stockEntity.getQuantity()) {
@@ -445,14 +446,12 @@ public class LibraryServiceImpl implements LibraryService {
                 throw new SpringLibraryException("NewQuantityIsLessThanIssued",
                         "Currently " + issuedItemsCount + "is issued, so new quantity can't be less then it", HttpStatus.BAD_REQUEST);
             }
-            logger.error("hey I am inside ");
             int quantityDecrease = stockEntity.getQuantity() - newQuantity;
             stockEntity.setAvailableQuantity(stockEntity.getAvailableQuantity() - quantityDecrease);
             stockEntity.setQuantity(newQuantity);
             logger.info("Item Stock Decreased");
         }
 
-        stockEntity.setLastStocked(LocalDateTime.now());
         entity.setItemStock(stockEntity);
     }
 
