@@ -122,19 +122,34 @@ public class MappingService {
     public BorrowItemDto borrowEntityToDto(ItemBorrowsEntity e) {
         LibraryItemsEntity item = e.getLibraryItem();
         LocalDateTime todayDayTime = LocalDateTime.now();
-        return new BorrowItemDto(
-                e.getId(),
-                e.getQuantity(),
-                item.getTitle(),
-                item.getUniqueId(),
-                e.getIssuer().getUniqueId(),
-                e.getBorrowDate(),
-                e.getExpectedReturnDate(),
-                e.getActualReturnDate(),
-                e.isReturnStatus(),
-                todayDayTime.toLocalDate().isAfter(e.getExpectedReturnDate()),
-                e.getItemCondition()
-        );
+        if(e.isReturnStatus()){
+            return new BorrowItemDto(
+                    e.getId(),
+                    e.getQuantity(),
+                    item.getTitle(),
+                    item.getUniqueId(),
+                    e.getIssuer().getUniqueId(),
+                    e.getBorrowDate(),
+                    e.getExpectedReturnDate(),
+                    e.getActualReturnDate(),
+                    true,
+                    e.isReturnedOnTime(),
+                    e.getItemCondition());
+        }else{
+            return new BorrowItemDto(
+                    e.getId(),
+                    e.getQuantity(),
+                    item.getTitle(),
+                    item.getUniqueId(),
+                    e.getIssuer().getUniqueId(),
+                    e.getBorrowDate(),
+                    e.getExpectedReturnDate(),
+                    e.getActualReturnDate(),
+                    false,
+                    todayDayTime.toLocalDate().isAfter(e.getExpectedReturnDate()),
+                    e.getItemCondition());
+        }
+
     }
 
     public IssuersDto.Fine fineEntityToDto(FinePdfEntity finePdf) {
@@ -160,6 +175,8 @@ public class MappingService {
             book.setAuthor(be.getAuthor());
             book.setBookType(book.getBookType());
             book.setBookClass(be.getBookClass());
+            book.setPublicationYear(be.getPublicationYear());
+            book.setBookType(be.getBookType());
             res.setBook(book);
         } else if (item.getItemType().equals("MAGAZINE")) {
             MagazineEntity me = item.getMagazines();
