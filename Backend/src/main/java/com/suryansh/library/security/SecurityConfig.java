@@ -41,8 +41,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth-> auth
                         .requestMatchers("/api/v1/library/add-new-item","/api/v1/library/borrow-item",
                                 "/api/v1/library/extend-return-date/**","/api/v1/library/return-item",
-                                "/api/v1/library/update-item-detail-and-stock/**",
-                                "/api/v1/issuer/pay-fine-upload-pdf/**"
+                                "/api/v1/library/update-item-detail-and-stock/**"
                         )
                         .authenticated()
                         .anyRequest()

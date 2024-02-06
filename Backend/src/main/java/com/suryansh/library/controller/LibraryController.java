@@ -113,14 +113,15 @@ public class LibraryController {
     public String updateItem(@Valid @RequestBody LibraryItemModel model, @PathVariable String unique_id) {
         return libraryService.updateItem(model, unique_id);
     }
+
     @GetMapping("/search-publisher/{name}")
-    public Set<String> searchPublisher(@PathVariable String name){
+    public Set<String> searchPublisher(@PathVariable String name) {
         return libraryService.searchPublisher(name);
     }
 
     @GetMapping("/all-paid-fines")
-    public PaginationPage getAllPaidFines(@RequestParam(defaultValue = "0")int page_no,
-                                          @RequestParam(defaultValue = "6")int page_size){
-        return libraryService.getAllPaidFines(page_no,page_size);
+    public PaginationPage getAllPaidFines(@RequestParam(defaultValue = "0") int page_no,
+                                          @RequestParam(defaultValue = "6") int page_size) {
+        return libraryService.getAllPaidFines(page_no, page_size);
     }
 }
